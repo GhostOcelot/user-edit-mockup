@@ -1,4 +1,4 @@
-import { deleteUser, toggleImportant } from "../actions/usersActions"
+import { deleteUser, toggleImportant, setTempUser } from "../actions/usersActions"
 import { connect } from "react-redux"
 import { useHistory } from "react-router-dom"
 
@@ -38,13 +38,14 @@ const UserList = ({ users, deleteUser, toggleImportant, setTempUser }) => {
 }
 
 const mapStateToProps = state => {
-	return { users: state.users }
+	return { users: state.users.allUsers }
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
 		deleteUser: user => dispatch(deleteUser(user)),
 		toggleImportant: user => dispatch(toggleImportant(user)),
+		setTempUser: tempUser => dispatch(setTempUser(tempUser)),
 	}
 }
 

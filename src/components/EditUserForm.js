@@ -1,10 +1,9 @@
 import { connect } from "react-redux"
-import { editUser } from "../actions/usersActions"
+import { editUser, setTempUser } from "../actions/usersActions"
 import { Link, useHistory } from "react-router-dom"
 
 const EditUserForm = ({ editUser, tempUser, setTempUser }) => {
 	const history = useHistory()
-
 	const handleSubmit = async e => {
 		e.preventDefault()
 		if (e.target.name.value && e.target.email.value) {
@@ -87,10 +86,15 @@ const EditUserForm = ({ editUser, tempUser, setTempUser }) => {
 	)
 }
 
+const mapStateToProps = state => {
+	return { tempUser: state.users.tempUser }
+}
+
 const mapDispatchToProps = dispatch => {
 	return {
 		editUser: user => dispatch(editUser(user)),
+		setTempUser: tempUser => dispatch(setTempUser(tempUser)),
 	}
 }
 
-export default connect(null, mapDispatchToProps)(EditUserForm)
+export default connect(mapStateToProps, mapDispatchToProps)(EditUserForm)

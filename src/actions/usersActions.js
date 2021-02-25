@@ -25,3 +25,10 @@ export const editUser = user => dispatch => {
 		user: user,
 	})
 }
+
+export const setTempUser = user => dispatch => {
+	dispatch({
+		type: "SET_TEMP_USER",
+		user: user,
+	})
+}

@@ -1,9 +1,17 @@
+import React from 'react'
 import { connect } from "react-redux"
-import { editUser, setTempUser } from "../actions/usersActions"
-import { Link, useHistory } from "react-router-dom"
+import { editUser } from "../actions/usersActions"
+import { Link, useHistory, useParams } from "react-router-dom"
 
-const EditUserForm = ({ editUser, tempUser, setTempUser }) => {
+const EditUserForm = ({ editUser, allUsers }) => {
 	const history = useHistory()
+  const { userId } = useParams()
+
+  const user = allUsers.find((user) => user.id === Number(userId))
+
+  const [tempUser, setTempUser] = React.useState(user)
+
+  
 	const handleSubmit = async e => {
 		e.preventDefault()
 		if (e.target.name.value && e.target.email.value) {
@@ -87,13 +95,12 @@ const EditUserForm = ({ editUser, tempUser, setTempUser }) => {
 }
 
 const mapStateToProps = state => {
-	return { tempUser: state.users.tempUser }
+	return { allUsers: state.users.allUsers }
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
 		editUser: user => dispatch(editUser(user)),
-		setTempUser: tempUser => dispatch(setTempUser(tempUser)),
 	}
 }
 

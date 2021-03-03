@@ -15,8 +15,13 @@ export const usersReducer = (state = initialState, action) => {
 				...state,
 				allUsers: state.allUsers.map(item => {
 					if (action.user.id === item.id) {
-						return !item.important ? { ...item, important: true } : { ...item, important: false }
-					} else return item
+						return { 
+              ...item,
+              important: !item.important
+            }
+					} else {
+            return item
+          }
 				}),
 			}
 

@@ -22,7 +22,7 @@ const UserList = ({ users, deleteUser, toggleImportant, setTempUser }) => {
 							<button
 								onClick={() => {
 									setTempUser(item)
-									history.push("edit-user")
+									history.push("edit-user/" + item.id)
 								}}
 							>
 								Edit

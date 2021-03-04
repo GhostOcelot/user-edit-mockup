@@ -1,11 +1,11 @@
 import UserList from "./UserList"
 import AddUserButton from "./AddUserButton"
 
-const Dashboard = ({ setTempUser }) => {
+const Dashboard = () => {
 	return (
 		<>
 			<AddUserButton />
-			<UserList setTempUser={setTempUser} />
+			<UserList />
 		</>
 	)
 }

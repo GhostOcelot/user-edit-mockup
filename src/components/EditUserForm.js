@@ -1,16 +1,24 @@
-import { connect } from "react-redux"
-import { editUser, setTempUser } from "../actions/usersActions"
-import { Link, useHistory } from "react-router-dom"
+import { useState } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { editUser } from "../actions/usersActions"
+import { Link, useHistory, useParams } from "react-router-dom"
 
-const EditUserForm = ({ editUser, tempUser, setTempUser }) => {
+const EditUserForm = () => {
+	const allUsers = useSelector(state => state.users.allUsers)
+	const { userId } = useParams()
+	const userToEdit = allUsers.find(user => user.id === parseInt(userId))
+	const [tempUser, setTempUser] = useState(userToEdit)
+	const [warning, setWarning] = useState(false)
 	const history = useHistory()
+	const dispatch = useDispatch()
+
 	const handleSubmit = async e => {
 		e.preventDefault()
 		if (e.target.name.value && e.target.email.value) {
-			editUser(tempUser)
+			dispatch(editUser(tempUser))
 			history.push("/")
 		} else {
-			document.querySelector(".warning").innerText = "NAME AND EMAIL MANDATORY"
+			setWarning(true)
 		}
 	}
 
@@ -76,7 +84,9 @@ const EditUserForm = ({ editUser, tempUser, setTempUser }) => {
 						onChange={e => handleChange(e)}
 					/>
 					<input type="submit" value="Update user info" />
-					<small className="warning"></small>
+					<small style={warning ? null : { display: "none" }} className="warning">
+						NAME AND EMAIL REQUIRED
+					</small>
 				</form>
 			</div>
 			<Link to="/">
@@ -86,15 +96,4 @@ const EditUserForm = ({ editUser, tempUser, setTempUser }) => {
 	)
 }
 
-const mapStateToProps = state => {
-	return { tempUser: state.users.tempUser }
-}
-
-const mapDispatchToProps = dispatch => {
-	return {
-		editUser: user => dispatch(editUser(user)),
-		setTempUser: tempUser => dispatch(setTempUser(tempUser)),
-	}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditUserForm)
+export default EditUserForm

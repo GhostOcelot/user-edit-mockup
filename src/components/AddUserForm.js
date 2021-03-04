@@ -1,27 +1,32 @@
-import { connect } from "react-redux"
+import { useDispatch } from "react-redux"
 import { addUser } from "../actions/usersActions"
 import { Link, useHistory } from "react-router-dom"
+import { useState } from "react"
 
-const AddUserForm = ({ addUser }) => {
+const AddUserForm = () => {
 	const history = useHistory()
+	const dispatch = useDispatch()
+	const [warning, setWarning] = useState(false)
 
 	const handleSubmit = async e => {
 		e.preventDefault()
 
 		if (e.target.name.value && e.target.email.value) {
-			addUser({
-				id: Math.random(),
-				name: e.target.name.value,
-				email: e.target.email.value,
-				phone: e.target.phone.value,
-				city: e.target.city.value,
-				zipcode: e.target.zipcode.value,
-				street: e.target.street.value,
-				suite: e.target.suite.value,
-			})
+			dispatch(
+				addUser({
+					id: Math.random(),
+					name: e.target.name.value,
+					email: e.target.email.value,
+					phone: e.target.phone.value,
+					city: e.target.city.value,
+					zipcode: e.target.zipcode.value,
+					street: e.target.street.value,
+					suite: e.target.suite.value,
+				})
+			)
 			history.push("/")
 		} else {
-			document.querySelector(".warning").innerText = "NAME AND EMAIL MANDATORY"
+			setWarning(true)
 		}
 	}
 
@@ -38,7 +43,9 @@ const AddUserForm = ({ addUser }) => {
 					<input type="text" id="zipcode" placeholder="zip code" />
 					<input type="text" id="city" placeholder="city" />
 					<input type="submit" value="Add user" />
-					<small className="warning"></small>
+					<small style={warning ? null : { display: "none" }} className="warning">
+						NAME AND EMAIL REQUIRED
+					</small>
 				</form>
 			</div>
 			<Link to="/">
@@ -48,9 +55,4 @@ const AddUserForm = ({ addUser }) => {
 	)
 }
 
-const mapDispatchToProps = dispatch => {
-	return {
-		addUser: newUser => dispatch(addUser(newUser)),
-	}
-}
-export default connect(null, mapDispatchToProps)(AddUserForm)
+export default AddUserForm

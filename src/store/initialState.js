@@ -1,5 +1,4 @@
 export const initialState = {
-	tempUser: {},
 	allUsers: [
 		{
 			id: 1,

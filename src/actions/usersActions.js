@@ -1,34 +1,27 @@
-export const deleteUser = user => dispatch => {
-	dispatch({
+export const deleteUser = user => {
+	return {
 		type: "DELETE_USER",
 		userId: user.id,
-	})
+	}
 }
 
-export const toggleImportant = user => dispatch => {
-	dispatch({
+export const toggleImportant = user => {
+	return {
 		type: "TOGGLE_IMPORTANT",
 		user: user,
-	})
+	}
 }
 
-export const addUser = newUser => dispatch => {
-	dispatch({
+export const addUser = newUser => {
+	return {
 		type: "ADD_USER",
 		newUser: newUser,
-	})
+	}
 }
 
-export const editUser = user => dispatch => {
-	dispatch({
+export const editUser = user => {
+	return {
 		type: "EDIT_USER",
 		user: user,
-	})
-}
-
-export const setTempUser = user => dispatch => {
-	dispatch({
-		type: "SET_TEMP_USER",
-		user: user,
-	})
+	}
 }

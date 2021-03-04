@@ -14,9 +14,8 @@ export const usersReducer = (state = initialState, action) => {
 			return {
 				...state,
 				allUsers: state.allUsers.map(item => {
-					if (action.user.id === item.id) {
-						return !item.important ? { ...item, important: true } : { ...item, important: false }
-					} else return item
+					if (action.user.id === item.id) return { ...item, important: !item.important }
+					else return item
 				}),
 			}
 
@@ -35,9 +34,6 @@ export const usersReducer = (state = initialState, action) => {
 				...filteredUsers.slice(id, filteredUsers.length),
 			]
 			return { ...state, allUsers: [...newUsers] }
-
-		case "SET_TEMP_USER":
-			return { ...state, tempUser: action.user }
 
 		default:
 			return state

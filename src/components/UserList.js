@@ -1,9 +1,12 @@
-import { deleteUser, toggleImportant, setTempUser } from "../actions/usersActions"
-import { connect } from "react-redux"
+import { deleteUser, toggleImportant } from "../actions/usersActions"
+import { useSelector, useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom"
 
-const UserList = ({ users, deleteUser, toggleImportant, setTempUser }) => {
+const UserList = () => {
 	const history = useHistory()
+	const users = useSelector(state => state.users.allUsers)
+	const dispatch = useDispatch()
+
 	return (
 		<ul className="user-list">
 			{users.map(item => {
@@ -21,14 +24,13 @@ const UserList = ({ users, deleteUser, toggleImportant, setTempUser }) => {
 						<div className="buttons-container">
 							<button
 								onClick={() => {
-									setTempUser(item)
-									history.push("edit-user")
+									history.push(`edit-user/${item.id}`)
 								}}
 							>
 								Edit
 							</button>
-							<button onClick={() => deleteUser(item)}>Delete</button>
-							<button onClick={() => toggleImportant(item)}>Important</button>
+							<button onClick={() => dispatch(deleteUser(item))}>Delete</button>
+							<button onClick={() => dispatch(toggleImportant(item))}>Important</button>
 						</div>
 					</li>
 				)
@@ -37,16 +39,4 @@ const UserList = ({ users, deleteUser, toggleImportant, setTempUser }) => {
 	)
 }
 
-const mapStateToProps = state => {
-	return { users: state.users.allUsers }
-}
-
-const mapDispatchToProps = dispatch => {
-	return {
-		deleteUser: user => dispatch(deleteUser(user)),
-		toggleImportant: user => dispatch(toggleImportant(user)),
-		setTempUser: tempUser => dispatch(setTempUser(tempUser)),
-	}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserList)
+export default UserList

@@ -1,7 +1,9 @@
+import { v4 as uuidv4 } from "uuid"
+
 export const initialState = {
 	allUsers: [
 		{
-			id: 1,
+			id: uuidv4(),
 			name: "Eddy Gordo",
 			email: "eddy.gordo@gmail.com",
 			street: "Ipanema 16",
@@ -11,7 +13,7 @@ export const initialState = {
 			phone: "515 445 44 87",
 		},
 		{
-			id: 2,
+			id: uuidv4(),
 			name: "Paul Phoenix",
 			email: "therealphoenix@yahoo.com",
 			street: "Saint Jones 295",
@@ -21,7 +23,7 @@ export const initialState = {
 			phone: "587 345 56 65",
 		},
 		{
-			id: 3,
+			id: uuidv4(),
 			name: "Ling Xiaoyu",
 			email: "lingling91@gmail.com",
 			street: "Wuxia 23",
@@ -31,7 +33,7 @@ export const initialState = {
 			phone: "03 465 777 9354 45",
 		},
 		{
-			id: 4,
+			id: uuidv4(),
 			name: "Sergei Dragunov",
 			email: "sergei.dragunov@yahoo.com",
 			street: "Patriarszye Prudy 375",
@@ -41,7 +43,7 @@ export const initialState = {
 			phone: "13 4648 345 222 23",
 		},
 		{
-			id: 5,
+			id: uuidv4(),
 			name: "Kazuya Mishima",
 			email: "thekingofironfist@gmail.com",
 			street: "Ginza 1",
@@ -51,7 +53,7 @@ export const initialState = {
 			phone: "90 4675 7948 33 29",
 		},
 		{
-			id: 6,
+			id: uuidv4(),
 			name: "Marshall Law",
 			email: "bruceleewannabe@gmail.com",
 			street: "Palm Avenue",

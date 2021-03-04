@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux"
 import { addUser } from "../actions/usersActions"
 import { Link, useHistory } from "react-router-dom"
 import { useState } from "react"
+import { v4 as uuidv4 } from "uuid"
 
 const AddUserForm = () => {
 	const history = useHistory()
@@ -14,7 +15,7 @@ const AddUserForm = () => {
 		if (e.target.name.value && e.target.email.value) {
 			dispatch(
 				addUser({
-					id: Math.random(),
+					id: uuidv4(),
 					name: e.target.name.value,
 					email: e.target.email.value,
 					phone: e.target.phone.value,

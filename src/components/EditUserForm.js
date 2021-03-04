@@ -6,7 +6,10 @@ import { Link, useHistory, useParams } from "react-router-dom"
 const EditUserForm = () => {
 	const allUsers = useSelector(state => state.users.allUsers)
 	const { userId } = useParams()
-	const userToEdit = allUsers.find(user => user.id === parseInt(userId))
+	const userToEdit = allUsers.find(user => {
+		return user.id === userId
+	})
+	console.log(userToEdit)
 	const [tempUser, setTempUser] = useState(userToEdit)
 	const [warning, setWarning] = useState(false)
 	const history = useHistory()

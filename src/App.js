@@ -3,8 +3,13 @@ import AddUserForm from "./components/AddUserForm"
 import EditUserForm from "./components/EditUserForm"
 import Dashboard from "./components/Dashboard"
 import { BrowserRouter, Switch, Route } from "react-router-dom"
+import { useFirestoreConnect } from "react-redux-firebase"
 
 const App = () => {
+	useFirestoreConnect({
+		collection: `allUsers`,
+	})
+
 	return (
 		<div className="App">
 			<BrowserRouter>

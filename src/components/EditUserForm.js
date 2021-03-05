@@ -1,24 +1,21 @@
 import { useState } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { editUser } from "../actions/usersActions"
+import { useSelector } from "react-redux"
 import { Link, useHistory, useParams } from "react-router-dom"
+import { useFirestore } from "react-redux-firebase"
 
 const EditUserForm = () => {
-	const allUsers = useSelector(state => state.users.allUsers)
+	const allUsers = useSelector(state => state.firestore.ordered.allUsers)
 	const { userId } = useParams()
-	const userToEdit = allUsers.find(user => {
-		return user.id === userId
-	})
-	console.log(userToEdit)
+	const userToEdit = allUsers.find(user => user.id === userId)
 	const [tempUser, setTempUser] = useState(userToEdit)
 	const [warning, setWarning] = useState(false)
 	const history = useHistory()
-	const dispatch = useDispatch()
+	const firestore = useFirestore()
 
 	const handleSubmit = async e => {
 		e.preventDefault()
 		if (e.target.name.value && e.target.email.value) {
-			dispatch(editUser(tempUser))
+			firestore.collection("allUsers").doc(userId).update(tempUser)
 			history.push("/")
 		} else {
 			setWarning(true)

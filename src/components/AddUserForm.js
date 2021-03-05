@@ -1,31 +1,30 @@
-import { useDispatch } from "react-redux"
-import { addUser } from "../actions/usersActions"
 import { Link, useHistory } from "react-router-dom"
 import { useState } from "react"
-import { v4 as uuidv4 } from "uuid"
+import { useFirestore } from "react-redux-firebase"
 
 const AddUserForm = () => {
 	const history = useHistory()
-	const dispatch = useDispatch()
 	const [warning, setWarning] = useState(false)
+	const firestore = useFirestore()
 
 	const handleSubmit = async e => {
 		e.preventDefault()
 
 		if (e.target.name.value && e.target.email.value) {
-			dispatch(
-				addUser({
-					id: uuidv4(),
-					name: e.target.name.value,
-					email: e.target.email.value,
-					phone: e.target.phone.value,
-					city: e.target.city.value,
-					zipcode: e.target.zipcode.value,
-					street: e.target.street.value,
-					suite: e.target.suite.value,
-				})
-			)
-			history.push("/")
+			const user = {
+				name: e.target.name.value,
+				email: e.target.email.value,
+				phone: e.target.phone.value,
+				city: e.target.city.value,
+				zipcode: e.target.zipcode.value,
+				street: e.target.street.value,
+				suite: e.target.suite.value,
+				important: false,
+			}
+			firestore
+				.collection("allUsers")
+				.add(user)
+				.then(() => history.push("/"))
 		} else {
 			setWarning(true)
 		}

@@ -20,6 +20,7 @@ const AddUserForm = () => {
 				street: e.target.street.value,
 				suite: e.target.suite.value,
 				important: false,
+				timeCreated: new Date(),
 			}
 			firestore
 				.collection("allUsers")

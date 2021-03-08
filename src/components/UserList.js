@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { useFirestore } from "react-redux-firebase"
+import Button from "@material-ui/core/Button"
 
 const UserList = () => {
 	const firestore = useFirestore()
@@ -25,17 +26,28 @@ const UserList = () => {
 									{item.zipcode} {item.city}
 								</p>
 								<div className="buttons-container">
-									<button
+									<Button
+										variant="contained"
+										color="primary"
+										className="btn"
 										onClick={() => {
 											history.push(`edit-user/${item.id}`)
 										}}
 									>
 										Edit
-									</button>
-									<button onClick={() => firestore.collection("allUsers").doc(item.id).delete()}>
+									</Button>
+									<Button
+										variant="contained"
+										color="primary"
+										className="btn"
+										onClick={() => firestore.collection("allUsers").doc(item.id).delete()}
+									>
 										Delete
-									</button>
-									<button
+									</Button>
+									<Button
+										variant="contained"
+										color="primary"
+										className="btn"
 										onClick={() =>
 											firestore
 												.collection("allUsers")
@@ -44,7 +56,7 @@ const UserList = () => {
 										}
 									>
 										Important
-									</button>
+									</Button>
 								</div>
 							</li>
 						)

@@ -6,6 +6,7 @@ import { Provider } from "react-redux"
 import { store } from "./redux/store"
 import { ReactReduxFirebaseProvider } from "react-redux-firebase"
 import { rrfProps } from "./firebase/firebaseConfig"
+import "fontsource-roboto"
 
 ReactDOM.render(
 	<React.StrictMode>

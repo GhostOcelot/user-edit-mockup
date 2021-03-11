@@ -1,6 +1,6 @@
 Adding user panel mockup build with React and Redux. 
 
-Data is saved in Firevbase Firestore.
+Data is saved in Firebase Firestore.
 
 Material UI styles applied to improve appearance.
 
